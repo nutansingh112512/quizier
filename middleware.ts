@@ -9,7 +9,8 @@ export default function middleware(request: NextRequest) {
   const quizUrl = new URL("/quiz", request.url);
   const requestedPage = request.nextUrl.pathname;
 
-  if (loggedin && (requestedPage === "/" || requestedPage === "/login"))
+  if (requestedPage === "/") return NextResponse.redirect(loginUrl);
+  if (loggedin && requestedPage === "/login")
     return NextResponse.redirect(quizUrl);
   if (!loggedin && requestedPage.startsWith("/quiz"))
     return NextResponse.redirect(loginUrl);
