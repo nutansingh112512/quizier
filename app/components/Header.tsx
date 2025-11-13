@@ -1,18 +1,17 @@
 "use client";
 import Cookies from "js-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { resetQuizState, type RootState, updateLogin } from "../store";
+import { useDispatch } from "react-redux";
+import { resetQuizState } from "../store";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { username } = useSelector((state: RootState) => state.user);
+  const username = Cookies.get("authToken");
 
   const handelogout = () => {
     Cookies.remove("authToken");
     router.replace("/login");
-    dispatch(updateLogin(""));
     dispatch(resetQuizState());
   };
 

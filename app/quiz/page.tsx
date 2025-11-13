@@ -1,10 +1,10 @@
 "use client";
-import { useSelector } from "react-redux";
-import { type RootState } from "../store";
+
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 export default function Quiz() {
-  const { username } = useSelector((state: RootState) => state.user);
+  const username = Cookies.get("authToken");
   return (
     <div className="flex flex-col gap-5 min-h-screen items-center px-5 pt-10 w-full">
       <div className="flex flex-col items-center gap-5">

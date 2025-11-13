@@ -1,8 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import Cookies from "js-cookie";
-import { RootState, updateLogin } from "../store";
 import { useRouter } from "next/navigation";
 
 export default function SignIn() {
@@ -14,8 +12,7 @@ export default function SignIn() {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { loggedin } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+
   const router = useRouter();
 
   const handleAuthentication = (e: React.FormEvent) => {
@@ -24,7 +21,6 @@ export default function SignIn() {
     if (Object.keys(dummyUsers).includes(username)) {
       if (dummyUsers[username] === password) {
         Cookies.set("authToken", username, { expires: 1 });
-        dispatch(updateLogin(username));
         setPassword("");
         setUsername("");
         router.replace("/quiz");
