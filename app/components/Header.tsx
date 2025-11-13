@@ -11,9 +11,9 @@ export default function Header() {
 
   const handelogout = () => {
     Cookies.remove("authToken");
+    router.replace("/login");
     dispatch(updateLogin(""));
     dispatch(resetQuizState());
-    router.replace("/login");
   };
 
   const pathname = usePathname();
